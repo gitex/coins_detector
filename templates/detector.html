@@ -5,6 +5,11 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .average_color {
+            background-color: RGB({{ color[0] }}, {{ color[1] }}, {{ color[2] }});
+        }
+    </style>
 </head>
 <body>
     <div class="images">
@@ -13,10 +18,11 @@
     </div>
 
     <div class="description">
-        <p>Найдено монет: {{ count_coins }}</p>
-        <p>Сумма монет: {{ total_value }}</p>
+        <p><b>Найдено монет:</b> {{ count_coins }}</p>
+        <p><b>Сумма монет:</b> {{ total_value }}</p>
+        <p><b>Размер изображения:</b> {{ size }}</p>
+        <p><b>Средний цвет:</b> RGB({{ color[0] }}, {{ color[1] }}, {{ color[2] }})<div class="average_color"></div></p>
     </div>
-
 
 </body>
 </html>

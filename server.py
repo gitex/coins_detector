@@ -68,7 +68,10 @@ def detector(filename):
         main_image=filename,
         predicted_image=PREDICTED_PREFIX + filename,
         total_value=d.total_value,
-        count_coins =d.count_coins
+        count_coins =d.count_coins,
+        size=" x ".join(map(str, d.size)),
+        color=d.average_color
+
     )
 
 

@@ -134,6 +134,15 @@ class CoinDetector:
                 (x - 40, y + 22), cv2.FONT_HERSHEY_PLAIN,
                 1.5, (255, 255, 255), thickness=2, lineType=cv2.LINE_AA)
 
+    @property
+    def size(self):
+        height, width, channels = self.image.shape
+        return height, width
+
+    @property
+    def average_color(self):
+        return list(map(int, [self.image[:, :, i].mean() for i in range(self.image.shape[-1])]))
+
     def save(self, output_file):
         cv2.putText(self.output, "Coins detector",
                     (5, self.output.shape[0] - 40), cv2.FONT_HERSHEY_PLAIN,
@@ -149,14 +158,16 @@ class CoinDetector:
 
 
 if __name__ == "__main__":
-    detector = CoinDetector('D:\YandexDisk\PycharmProjects\OpenCV_Projects\Coins\input1.jpg')
+    path = os.path.join(os.path.dirname(MAIN_PATH), "input.jpg")
+    detector = CoinDetector(path)
 
     coins = []
 
     for title, v in [('One', 1), ('Two', 2), ('Five', 5), ('Ten', 10)]:
         coins.append(Coin(title, str(v), v, str(v)))
 
-    detector.upload_coins(coins=coins, folder=os.path.join(MAIN_PATH, "detector", "examples"))
+    detector.upload_coins(coins=coins, folder=os.path.join(MAIN_PATH, "examples"))
 
     detector.draw_predictions()
-    detector.save('output_coins.jpg')
+    print(detector.average_color)
+    # detector.save('output.jpg')
